@@ -20,8 +20,7 @@
                                         age: {{ pet.age }}
                                     {% endif %}
                                 </h5>
-                                <h5 class="card-title">Otto</h5>
-                            {% endfor %}
+                             {% endfor %}
                             <!-- First 30 chars from the description -->
                             <p class="card-text">{{ pet_photo.description|truncatechars:30 }}</p>
                             <!-- Button to the Photo Details Page -->
@@ -38,7 +37,7 @@
         <h1 class='text-center'>No pet photos yet</h1>
         <div class=" row d-flex justify-content-center align-content-center">
             <!-- Button to Add a new Photo -->
-            <a href="#" class="btn btn-lg btn-secondary row align-self-baseline">Add Photo</a>
+            <a href="{% url 'create pet photo' %}" class="btn btn-lg btn-secondary row align-self-baseline">Add Photo</a>
         </div>
     {% endif %}
 {% endblock %}
