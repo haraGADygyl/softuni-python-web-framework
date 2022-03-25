@@ -1,7 +1,11 @@
+from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.urls import reverse
 
 from tests_demo.web.models import Profile
+from tests_demo.web.views import ProfilesListView
+
+UserModel = get_user_model()
 
 
 class ProfilesListViewTests(TestCase):
@@ -23,3 +27,28 @@ class ProfilesListViewTests(TestCase):
         profiles = response.context['object_list']
 
         self.assertEqual(len(profiles), 2)
+
+    def test_get__when_not_logged_user__expect_context_user_to_be_No_user(self):
+        response = self.client.get(reverse('list profiles'))
+
+        self.assertEqual(
+            ProfilesListView.no_logged_in_user_value,
+            response.context[ProfilesListView.context_user_key],
+        )
+
+    def test_get__when_logged_user__expect_context_user_to_be_username(self):
+        user_data = {
+            'username': 'doncho',
+            'password': 'doncho123',
+        }
+
+        UserModel.objects.create_user(**user_data)
+
+        self.client.login(**user_data)
+
+        response = self.client.get(reverse('list profiles'))
+
+        self.assertEqual(
+            user_data['username'],
+            response.context[ProfilesListView.context_user_key],
+        )
