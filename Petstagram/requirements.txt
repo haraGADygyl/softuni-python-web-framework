@@ -1,4 +1,7 @@
 asgiref==3.5.0
+click==7.1.2
+click-didyoumean==0.3.0
+cls-client==1.4.0
 Django==4.0.3
 Pillow==9.0.1
 psycopg2-binary==2.9.3

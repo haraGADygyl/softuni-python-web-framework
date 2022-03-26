@@ -42,6 +42,7 @@ class EditPetPhotoView(views.UpdateView):
     def get_success_url(self):
         return reverse_lazy('pet photo details', kwargs={'pk': self.object.id})
 
+
 def like_pet_photo(request, pk):
     pet_photo = PetPhoto.objects.get(pk=pk)
     pet_photo.likes += 1
